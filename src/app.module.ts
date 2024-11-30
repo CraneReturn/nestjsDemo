@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MenuModule } from './modules/menu/menu.module';
 @Module({
   imports: [UserModule, AuthModule,TypeOrmModule.forRoot(
     {
@@ -17,7 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       //自动更新表的键名
     },
-  )],
+  ), MenuModule],
   controllers: [AppController],
   providers: [AppService],
 })
