@@ -14,6 +14,6 @@ export function errorMethods(msg) {
 export function wrapperResponse(p,msg){
     return p.then((data)=>{
         return successMethods(data,msg)
-    }).catch((error)=>{
-        return errorMethods(error.msg)})   
+    }).catch((error)=>{ 
+        return errorMethods(error.sqlMessage)})   
 }

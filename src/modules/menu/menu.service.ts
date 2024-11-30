@@ -23,8 +23,6 @@ export class MenuService {
     async getMenuWithChildren() {
         //获取所有的菜单
         const menus = await this.menuRepository.find();
-        console.log(menus,'1141');
-        
         const menuMaps = new Map <number,Menu>();
         menus.forEach(menu => 
         {
@@ -43,10 +41,20 @@ export class MenuService {
                     parentMenu.children.push(menu);
                 }
             }
-        });
-        
-        console.log(result);
-        
+        });        
         return result
+    }
+    //创建
+    addnewMenu(body){
+        const data=body.data||body
+        return this.menuRepository.save(data)
+    }
+    //编辑
+    updateMenu(body){
+        console.log(body);
+        
+        const id=body?.data?.id || body.id;
+        const data=body.data||body;
+        return this.menuRepository.update(id,data)
     }
 };
