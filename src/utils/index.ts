@@ -11,3 +11,9 @@ export function errorMethods(msg) {
         msg
     }
 };
+export function wrapperResponse(p,msg){
+    return p.then((data)=>{
+        return successMethods(data,msg)
+    }).catch((error)=>{
+        return errorMethods(error.msg)})   
+}

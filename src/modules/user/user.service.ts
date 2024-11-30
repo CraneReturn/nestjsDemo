@@ -33,4 +33,7 @@ export class UserService{
     findByUsername(username:string):Promise<User>{
         return this.userRepository.findOneBy({username})
     }
+    findByToken(id:number):Promise<User>{
+        return this.userRepository.findOneBy({id})
+    }
 };
