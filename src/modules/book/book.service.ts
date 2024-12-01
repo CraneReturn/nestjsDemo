@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 import { Book } from './book.entity';
-import { User } from '../user/user.entity';
 
 @Injectable()
 //可以被注入到controller
@@ -48,4 +47,21 @@ export class BookService {
             take//分页条件
         })
     }
+    
+
+    //返回total
+    countBookList(query: any = {}) {
+        const { title, author } = query;
+        let where = 'where 1=1'
+        if (title) {
+            where += ` and title like '%${title}%'`;
+        }
+        if (author) {
+            where += ` and author like '%${author}%'`;
+        }
+        const sql = `select count(*) as count from book ${where}`;
+        return this.bookRepository.query(sql);
+    }
+    //上传文件本地上传
+    
 }
