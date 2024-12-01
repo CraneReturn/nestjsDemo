@@ -5,6 +5,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MenuModule } from './modules/menu/menu.module';
+import { BookModule } from './modules/book/book.module';
 @Module({
   imports: [UserModule, AuthModule,TypeOrmModule.forRoot(
     {
@@ -18,7 +19,7 @@ import { MenuModule } from './modules/menu/menu.module';
       synchronize: true,
       //自动更新表的键名
     },
-  ), MenuModule],
+  ), MenuModule, BookModule],
   controllers: [AppController],
   providers: [AppService],
 })
