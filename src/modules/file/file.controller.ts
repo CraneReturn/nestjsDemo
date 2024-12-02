@@ -5,14 +5,23 @@ import { FileService } from './file.service';
 
 @Controller('file')
 export class FileController {
-    constructor(private fileService:FileService){}
+    constructor(private fileService: FileService) { }
     @Post('/upload')
     @UseInterceptors(FileInterceptor('file'))
     upload(@UploadedFile() file: Express.Multer.File) {
+        //单上传到磁盘
         return wrapperResponse(
              this.fileService.uploadFile(file),
             '上传文件成功'
         )
+        //上传到磁盘也上传到minio
+        // return this.fileService.uploadFileMinio(file)
+
+    }
+    @Post('/uploadminio')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadminio(@UploadedFile() file: Express.Multer.File) {
+        return this.fileService.uploadMinio(file)
 
     }
     //多文件上传
@@ -25,4 +34,5 @@ export class FileController {
     uploadParams(@Body() body: any, @UploadedFile() file: Express.Multer.File) {
         // console.log(file, query);
     }
+
 }

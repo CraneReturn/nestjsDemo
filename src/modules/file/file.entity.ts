@@ -15,7 +15,7 @@ export class FileEntity {
     @Column()
     size:number
    
-    @Column()
+    @Column({ type: 'varchar', length: 500 })
     path:string
 
 
