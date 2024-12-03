@@ -74,6 +74,7 @@ export class FileService {
         return { url }
     }
     //单上传到服务器 返回url
+    
     async uploadMinio(mfile: Express.Multer.File) {
         console.log(mfile);
 

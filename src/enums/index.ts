@@ -1,0 +1,13 @@
+export enum RESPONSE_CODE{
+    SUCCESS=200,
+    ERROR=500,
+    BAD_REQUEST=400,
+    UNAUTHORIZED=401,
+    FORBIDDEN=403,
+    NOT_FOUND=404,
+    METHOD_NOT_ALLOWED=405,
+}
+export enum RESPONSE_MSG{
+    SUCCESS='请求成功',
+    ERROR='请求失败',
+}

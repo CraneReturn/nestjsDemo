@@ -1,27 +1,26 @@
-import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { wrapperResponse } from 'src/utils';
+import { responseMessage, returnResponse, wrapperResponse } from 'src/utils';
 import { FileService } from './file.service';
-
+import { Response } from 'express';
+import { RESPONSE_CODE } from 'src/enums';
+import { ResponseDto } from 'src/dto/response.dto';
 @Controller('file')
 export class FileController {
     constructor(private fileService: FileService) { }
     @Post('/upload')
     @UseInterceptors(FileInterceptor('file'))
-    upload(@UploadedFile() file: Express.Multer.File) {
-        //单上传到磁盘
-        return wrapperResponse(
-             this.fileService.uploadFile(file),
-            '上传文件成功'
-        )
+    async upload(@UploadedFile() file: Express.Multer.File, @Res() res: Response) {
         //上传到磁盘也上传到minio
-        // return this.fileService.uploadFileMinio(file)
-
+        const result = await this.fileService.uploadFileMinio(file);
+        return returnResponse(result, res)
     }
     @Post('/uploadminio')
     @UseInterceptors(FileInterceptor('file'))
-    uploadminio(@UploadedFile() file: Express.Multer.File) {
-        return this.fileService.uploadMinio(file)
+
+    async uploadminio(@UploadedFile() file: Express.Multer.File, @Res() res: Response): Promise<Response> {
+        const result = await this.fileService.uploadMinio(file);
+        return returnResponse(result, res)
 
     }
     //多文件上传

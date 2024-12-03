@@ -1,3 +1,7 @@
+import * as dayjs from 'dayjs';
+import { ResponseDto } from 'src/dto/response.dto';
+import { RESPONSE_CODE, RESPONSE_MSG } from "src/enums"
+
 export function successMethods(data, msg) {
     return {
         code: 0,
@@ -37,4 +41,25 @@ export function wrapperCountResponse(dataPromise, countPromise, msg) {
     }).catch((error) => {
         return errorMethods(error.sqlMessage)
     })
+}
+//新的统一返回的方法
+export interface Response<T> {
+    data: T;
+    msg: string;
+    code: number;
+    timestamp: number;
+}
+export const responseMessage = <T = any>(
+    data,
+    msg: string = RESPONSE_MSG.SUCCESS,
+    code: number = RESPONSE_CODE.SUCCESS
+): Response<T> => ({
+    data,
+    msg,
+    code,
+    timestamp: dayjs().valueOf()
+})
+export const returnResponse = (result, res) => {
+    const response: ResponseDto = responseMessage(result);
+    return res.status(RESPONSE_CODE.SUCCESS).json(response);
 }
