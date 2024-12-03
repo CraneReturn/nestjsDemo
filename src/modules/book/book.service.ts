@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
 import { Book } from './book.entity';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 //可以被注入到controller

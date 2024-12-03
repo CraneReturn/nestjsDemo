@@ -13,6 +13,7 @@ export class AuthService {
     //先去查询有无该username
     const user = await this.userService.findByUsername(username);
     const md5Password = md5(password).toUpperCase();
+    
     if (user.password !== md5Password) {
       throw new UnauthorizedException('用户名或者密码错误');
     }

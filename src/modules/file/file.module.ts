@@ -25,7 +25,7 @@ import { FileService } from './file.service';
     // }),
   }),
   ],
-  providers: [FileService]
+  providers: [FileService,FileEntity]
 
 })
 export class FileModule {

@@ -9,6 +9,7 @@ import { BookModule } from './modules/book/book.module';
 import { FileModule } from './modules/file/file.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigEnum } from './enums/config.enum';
+import { LikeModule } from './modules/like/like.module';
 @Module({
   imports: [UserModule, AuthModule, ConfigModule.forRoot({
     isGlobal: true, // 设置为全局模块
@@ -45,7 +46,7 @@ import { ConfigEnum } from './enums/config.enum';
         } as TypeOrmModuleOptions;
     },
     }),
-    MenuModule, BookModule, FileModule],
+    MenuModule, BookModule, FileModule, LikeModule],
   controllers: [AppController],
   providers: [AppService],
 })

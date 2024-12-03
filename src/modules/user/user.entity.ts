@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
-
+import { LikeFile } from "src/modules/like/like.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 //数据库的定义
 @Entity('user')
 export class User {
@@ -18,4 +18,7 @@ export class User {
     active: number;
     @Column()
     avatar: string;
+
+    @OneToMany(() => LikeFile, like => like.user)
+    likes: LikeFile[]; // 反向关系
 }
